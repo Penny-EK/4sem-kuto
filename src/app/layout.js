@@ -1,9 +1,8 @@
-
 import "./globals.css";
 
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Raleway, Open_Sans } from "next/font/google";
-
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -29,6 +28,7 @@ export default function RootLayout({ children }) {
       <body className="flex min-h-full flex-col">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
