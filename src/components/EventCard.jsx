@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const EventCard = ({ image, title, date, time, location, building, price }) => {
   return (
+    <Link href={`/arrangment/${id}`} className="block">
     <article className="mb-6 border-b border-neutral-200 pb-6">
       <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
         <small className="rounded bg-white/90 px-2 py-1">{date}</small>
@@ -41,7 +43,9 @@ const EventCard = ({ image, title, date, time, location, building, price }) => {
       </div>
       </div>
     </article>
+    </Link>
   );
 };
+
 
 export default EventCard;
