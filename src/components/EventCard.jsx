@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const EventCard = ({ image, title, date, time, location, building, price }) => {
   return (
-    <article className="mb-6 border-b border-neutral-200 pb-6">
+    <article className="mb-17  ">
       <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
         <small className="rounded bg-white/90 px-2 py-1">{date}</small>
 
@@ -27,7 +27,7 @@ const EventCard = ({ image, title, date, time, location, building, price }) => {
 
         <div className="flex items-end justify-between">
           <div>
-            <small>
+            <small className="uppercase">
               {time} · {date} ·  {location}
             </small>
            
