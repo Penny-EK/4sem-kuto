@@ -1,15 +1,18 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import "./globals.css";
+
+import Header from "@/components/Header";
+import { Raleway, Open_Sans } from "next/font/google";
+
+
+const raleway = Raleway({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const openSans = Open_Sans({
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata = {
@@ -21,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${raleway.className} ${openSans.className} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Header />
