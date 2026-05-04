@@ -3,19 +3,15 @@ import Image from "next/image";
 const EventCard = ({ image, title, date, time, location, building, price }) => {
   return (
     <article className="mb-6 border-b border-neutral-200 pb-6">
-        <div className="relative mx-auto w-[92%] ">
-        <span className="bg-white/90 px-2 py-1 text-xs font-medium rounded">
-            {date}
-          </span>
+      <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
+        <small className="rounded bg-white/90 px-2 py-1">{date}</small>
 
-          <span className="bg-yellow-300 px-3 py-1 text-xs font-semibold uppercase rounded-md">
-            {building || "Lokation"}
-          </span>
-        </div>
-        
-      {/* IMAGE */}
-      <div className="relative mx-auto w-[90%] h-[220px] overflow-hidden rounded-2xl">
+        <small className="rounded-md bg-yellow-300 px-3 py-1 uppercase">
+          {building || "Lokation"}
+        </small>
+      </div>
 
+      <div className="relative mx-auto h-[220px] w-[90%] overflow-hidden rounded-2xl">
         {image && (
           <Image
             src={image}
@@ -24,39 +20,26 @@ const EventCard = ({ image, title, date, time, location, building, price }) => {
             className="object-cover"
           />
         )}
-
-        
       </div>
 
-      {/* TEXT */}
-      <div className="mx-auto mt-3 w-[92%]">
-
-        <h3 className="text-xl font-medium leading-tight mb-2">
-          {title}
-        </h3>
+      <div className="mx-auto mt-3 w-[90%]">
+        <h3 className="mb-2">{title}</h3>
 
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-sm text-neutral-700">
-              {time} · {date}
-            </p>
-            <p className="text-sm text-neutral-700">
-              {location}
-            </p>
+            <small>
+              {time} · {date} ·  {location}
+            </small>
+           
           </div>
 
-          <button className="text-sm uppercase underline underline-offset-4">
-            Læs mere
-          </button>
+          
         </div>
-
-        {price && (
-          <p className="mt-1 text-sm font-medium">
-            {price}
-          </p>
-        )}
+        <div className="mx-auto mb-2 flex w-[100%] items-center justify-between">
+        {price && <small className="mt-1 block">{price}</small>}
+        <button className="underline underline-offset-4">LÆS MERE</button>
       </div>
-
+      </div>
     </article>
   );
 };
