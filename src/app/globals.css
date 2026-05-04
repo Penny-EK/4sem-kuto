@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
+/* =========================
+   COLORS
+========================= */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --font-heading: "Raleway", sans-serif;
+  --font-body: "Open Sans", sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* override default fonts */
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +28,105 @@
   }
 }
 
+/* =========================
+   BASE
+========================= */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* =========================
+   TYPOGRAPHY (MOBILE FIRST)
+========================= */
+
+/* H1 */
+h1 {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+/* H2 */
+h2 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+/* H3 */
+h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* H4 / label */
+h4 {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Body */
+p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Meta */
+small {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  small {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 16px;
+  }
 }
