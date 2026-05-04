@@ -1,3 +1,5 @@
+// This component is used in the header and the burger menu to show the opening hours of the two locations. It has a dropdown that shows the opening hours when clicked, and it closes when clicking outside of it. The styling is different for the header and the burger menu, which is determined by the "type" prop.
+
 "use client";
 import { useEffect, useRef, useState } from "react";
 
