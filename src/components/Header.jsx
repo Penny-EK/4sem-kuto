@@ -50,7 +50,7 @@ const Header = () => {
   return (
     <header className="header mx-9.5 my-5.75">
       <div className="flex items-start justify-between gap-5 md:items-center">
-        <a href="#index">
+        <a href="/">
           <Image src={logo} alt="Logo" width={120} height={120} />
         </a>
         <div className="flex flex-1 items-center justify-end gap-5">
