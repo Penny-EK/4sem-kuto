@@ -1,6 +1,7 @@
 import Image from "next/image";
 import KVbuilding from "@/assets/KV-building.png";
 import TKbuilding from "@/assets/TK-building.png";
+import EmployeeListContainer from "@/components/EmployeeListContainer";
 export default async function OmOs() {
   return (
     <main>
@@ -91,6 +92,7 @@ export default async function OmOs() {
         </dl>
       </div>
       {/* employee list */}
+      <EmployeeListContainer />
     </main>
   );
 }
