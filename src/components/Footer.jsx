@@ -4,14 +4,10 @@ import Link from "next/link";
 
 // Assets
 import Image from "next/image";
-import logo from "@/assets/KV-logo.svg";
-import LFlogo from "@/assets/LF-logo.png";
 import HKlogo from "@/assets/HK-logo.png";
 import SKFlogo from "@/assets/SKF-logo.png";
 
 // Icons
-import { IoMenuSharp } from "react-icons/io5";
-import { IoCloseSharp } from "react-icons/io5";
 import { IoArrowForwardSharp } from "react-icons/io5";
 
 // Components
@@ -19,7 +15,7 @@ import Subscribe from "./Subscibe";
 
 const Footer = () => {
   // small links in footer.
-  const footerLinks = [
+  const otherLinks = [
     { href: "/", text: "Biblioteket" },
     { href: "/blog", text: "Kulturhavnen" },
     { href: "/tables", text: "Book Værftmuseet" },
@@ -47,39 +43,35 @@ const Footer = () => {
   }
 
   return (
-    <>
+    <footer className="bg-[#1B1B1B] text-white md:grid md:grid-cols-5">
       <Subscribe />
-      <footer className="bg-[#1B1B1B] p-9.25 text-white">
-        <ul className="grid gap-3">
-          <HeaderLinks href="/forside">Åbningstider</HeaderLinks>
-          <HeaderLinks href="/">Find vej</HeaderLinks>
-          <HeaderLinks href="/nyheder">Kontakt</HeaderLinks>
-          <HeaderLinks href="/mad">Mad</HeaderLinks>
-          <HeaderLinks href="/om_os">Booking</HeaderLinks>
-          <HeaderLinks href="/om_os">Nyheder</HeaderLinks>
-          <HeaderLinks href="/liveforbundet">
-            LiveForbundet
-            <IoArrowForwardSharp />
-          </HeaderLinks>
-        </ul>
+      <ul className="grid gap-3 p-9.25">
+        <HeaderLinks href="/forside">Åbningstider</HeaderLinks>
+        <HeaderLinks href="/">Find vej</HeaderLinks>
+        <HeaderLinks href="/nyheder">Kontakt</HeaderLinks>
+        <HeaderLinks href="/mad">Mad</HeaderLinks>
+        <HeaderLinks href="/om_os">Booking</HeaderLinks>
+        <HeaderLinks href="/om_os">Nyheder</HeaderLinks>
+        <HeaderLinks href="/liveforbundet">LiveForbundet</HeaderLinks>
+      </ul>
 
-        <ul className="mt-4 mb-8 grid gap-7">
-          {footerLinks.map((link) => {
-            return (
-              <li key={`${link.href}-${link.text}`}>
-                <Link
-                  href={link.href}
-                  className="justify-start font-['Open_Sans'] text-xl font-normal text-white"
-                >
-                  <span className="flex items-center gap-2">
-                    {link.text} <IoArrowForwardSharp />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
+      <ul className="mt-4 mb-8 grid gap-7 p-9.25 md:gap-3">
+        {otherLinks.map((link) => {
+          return (
+            <li key={`${link.href}-${link.text}`}>
+              <Link
+                href={link.href}
+                className="justify-start font-['Open_Sans'] text-xl font-normal text-white"
+              >
+                <span className="flex items-center gap-2">
+                  {link.text} <IoArrowForwardSharp />
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="p-9.25">
         <h2 className="font-bold">Adresser</h2>
         <dl className="mt-4 mb-8 space-y-2">
           <dt className="font-bold">Kulturvæftet</dt>
@@ -87,6 +79,8 @@ const Footer = () => {
           <dt className="font-bold">Toldkammeret</dt>
           <dd className="font-normal">Havnegade 1, 3000 Helsingør</dd>
         </dl>
+      </div>
+      <div className="p-9.25">
         <p className="font-bold">kend os på numre</p>
 
         <ul className="mt-4 mb-8">
@@ -106,12 +100,14 @@ const Footer = () => {
             <a href=""> Nyhedsbreve</a>
           </li>
         </ul>
+        <div className="flex w-full justify-end p-9.25">
+          <a href="https://www.kunst.dk/">
+            <Image src={SKFlogo} alt="SKF Logo" width={80} />
+          </a>
+        </div>
 
-        <a href="https://www.kunst.dk/">
-          <Image src={SKFlogo} alt="SKF Logo" width={50} height={60} />
-        </a>
-        <div className="flex">
-          <div className="flex flex-col gap-2">
+        <div className="flex items-end justify-between">
+          <div className="flex flex-col gap-2 text-[#787878]">
             <a href="">Privatlivspolitik</a>
             <a href="">Handelsbetingelser</a>
           </div>
@@ -119,8 +115,8 @@ const Footer = () => {
             <Image src={HKlogo} alt="HK Logo" width={136} height={40} />
           </a>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 };
 
