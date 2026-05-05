@@ -21,6 +21,7 @@ export default async function Home() {
         events.map((event) => (
           <EventCard
           key={event.id}
+          id={event.id}
             image={event.event_img}
             title={event.event_name}
             date={event.event_date}
