@@ -1,4 +1,5 @@
 import Button from "./Button";
+import SubscribeForm from "./SubscribeForm";
 
 const Subscribe = () => {
   return (
@@ -8,6 +9,7 @@ const Subscribe = () => {
         og få nyt fra vores fællesskaber på Kulturværftet og i Toldkammeret hver
         fredag.
       </p>
+      <SubscribeForm />
       <div>
         <Button>Tilmeld her</Button>
       </div>
