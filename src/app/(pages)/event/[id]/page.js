@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
-//import Label from "@/components/Label"
+import Label from "@/components/Label";
 
 export default async function Singleview({ params }) {
   const { id } = await params;
@@ -32,9 +32,9 @@ export default async function Singleview({ params }) {
       </div>
       )}
 <p>{event.event_date} · {event.event_time}</p> 
-{/* <Label variant="location">
-            {building || "Lokation"}
-          </Label> */}
+<Label variant="location">
+  {event.event_building || "Lokation"}
+</Label>
 
       <h1>{event.event_name}</h1>
 
