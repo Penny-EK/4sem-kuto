@@ -2,11 +2,31 @@ import Image from "next/image";
 import KVbuilding from "@/assets/KV-building.png";
 import TKbuilding from "@/assets/TK-building.png";
 import EmployeeListContainer from "@/components/EmployeeListContainer";
+import Faq from "@/components/Faq";
 export default async function OmOs() {
   return (
     <main>
       <h1>To huse – én organisation</h1>
-      <div id="KVsection">
+      <div>
+        <ul>
+          <li>
+            <a href="#kvSection">Kulturværftet</a>
+          </li>
+          <li>
+            <a href="#tkSection">Toldkammeret</a>
+          </li>
+          <li>
+            <a href="#faqSection">FAQ</a>
+          </li>
+          <li>
+            <a href="#contactSection">Kontakt</a>
+          </li>
+          <li>
+            <a href="#employeeSection">Medarbejdere</a>
+          </li>
+        </ul>
+      </div>
+      <div id="kvSection">
         <h2>Kulturværftet</h2>
         <p>
           Kulturværftet er et moderne kulturcenter og et regionalt spillested
@@ -36,7 +56,7 @@ export default async function OmOs() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-      <div id="TKsection">
+      <div id="tkSection">
         <h2>Toldkammeret</h2>
         <p>
           Toldkammeret er KUTO’s uformelle samlingspunkt for fællesskab og
@@ -66,9 +86,17 @@ export default async function OmOs() {
       {/*  */}
       {/*  */}
       {/* Indsæt FAQ */}
+      <section id="faqSection" className="bg-[#F9F9F9]">
+        <Faq title="Hvad er Kulturværftet?">
+          <p>
+            Vi har flere muligheder for at bestille billetter, herunder online,
+            telefonisk og i vores lokaler.
+          </p>
+        </Faq>
+      </section>
       {/*  */}
       {/*  */}
-      <div>
+      <div id="contactSection">
         <h2>Kontakt</h2>
         <dl>
           <dt className="font-bold">billetkøb</dt>
@@ -92,7 +120,9 @@ export default async function OmOs() {
         </dl>
       </div>
       {/* employee list */}
-      <EmployeeListContainer />
+      <div id="employeeSection">
+        <EmployeeListContainer />
+      </div>
     </main>
   );
 }
