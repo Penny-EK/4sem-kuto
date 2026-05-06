@@ -11,10 +11,14 @@ import Faq from "@/components/Faq";
 // Icons
 
 export default async function OmOs() {
+  const gap = "1.5rem"; // gap-6 = 1.5rem
+  const maxWidthStyle = { maxWidth: `calc(1200px / 2 - ${gap})` };
   return (
     <main>
-      <div>
-        <h1 className="m-auto w-[90vw] max-w-300">To huse – én organisation</h1>
+      <div className="grid-cols-2 md:grid">
+        <h1 style={maxWidthStyle} className="m-auto w-[90vw] max-w-300">
+          To huse – én organisation
+        </h1>
 
         <ul className="my-9.25 ml-17.5 grid gap-3 rounded-tl-[5px] rounded-bl-[5px] bg-[#1B1B1B] py-6 pl-8 text-white">
           <li>
@@ -36,8 +40,11 @@ export default async function OmOs() {
         </ul>
       </div>
 
-      <div id="kvSection" className="py-9.25">
-        <div className="m-auto w-[90vw] max-w-300">
+      <div id="kvSection" className="gap-6 py-9.25 md:grid md:grid-cols-2">
+        <div
+          style={maxWidthStyle}
+          className="m-auto w-[90vw] max-w-300 md:w-full"
+        >
           <h2>Kulturværftet</h2>
           <p>
             Kulturværftet er et moderne kulturcenter og et regionalt spillested
@@ -53,7 +60,11 @@ export default async function OmOs() {
           </p>
         </div>
         <Image src={KVbuilding} alt="Kulturværftet" className="my-6" />
-        <div className="m-auto w-[90vw] max-w-300">
+
+        <div
+          style={maxWidthStyle}
+          className="m-auto w-[90vw] max-w-300 md:col-start-2 md:row-start-2 md:w-full"
+        >
           <h3>Adresse</h3>
           <p>Allegade 2, 3000 Helsingør</p>
           <h3>Åbningstider</h3>
@@ -65,24 +76,27 @@ export default async function OmOs() {
             <li>lørdag 10:00 — 16:00</li>
             <li>søndag 11:00 — 16:00</li>
           </ul>
-
-          {/* Google maps embed */}
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.100851313558!2d12.609252440008527!3d56.035115739487665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46523111936d2171%3A0xf3cbcf3b60041cfd!2sThe%20Culture%20Yard!5e0!3m2!1sen!2sdk!4v1777977213774!5m2!1sen!2sdk"
-            width="400"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="my-6 w-full"
-          ></iframe>
         </div>
+
+        {/* Google maps embed */}
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.100851313558!2d12.609252440008527!3d56.035115739487665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46523111936d2171%3A0xf3cbcf3b60041cfd!2sThe%20Culture%20Yard!5e0!3m2!1sen!2sdk!4v1777977213774!5m2!1sen!2sdk"
+          width="400"
+          height="300"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="my-6 w-full"
+        ></iframe>
       </div>
 
       {/* Toldkammeret */}
-      <div id="tkSection" className="py-9.25">
-        <div className="m-auto w-[90vw] max-w-300">
+      <div id="tkSection" className="gap-6 py-9.25 md:grid md:grid-cols-2">
+        <div
+          style={maxWidthStyle}
+          className="m-auto w-[90vw] max-w-300 md:col-start-2 md:row-start-1 md:w-full"
+        >
           <h2>Toldkammeret</h2>
           <p>
             Toldkammeret er KUTO’s uformelle samlingspunkt for fællesskab og
@@ -96,7 +110,10 @@ export default async function OmOs() {
           </p>
         </div>
         <Image src={TKbuilding} alt="Toldkammeret" className="my-6" />
-        <div className="m-auto w-[90vw] max-w-300">
+        <div
+          style={maxWidthStyle}
+          className="m-auto w-[90vw] max-w-300 md:col-start-1 md:row-start-2 md:w-full"
+        >
           <h3>Adresse</h3>
           <p>Havnepladsen 1, 3000 Helsingør</p>
           <h3>Åbningstider</h3>
@@ -105,17 +122,17 @@ export default async function OmOs() {
             <li>lørdag - søndag Lukket</li>
           </ul>
           {/* Google maps embed */}
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1013.2242877447003!2d12.613210378407354!3d56.03449117819393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465231e4eaf4712b%3A0xd226e0856478d306!2sToldkammeret!5e0!3m2!1sen!2sdk!4v1777977527643!5m2!1sen!2sdk"
-            width="400"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="my-6 w-full"
-          ></iframe>
         </div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1013.2242877447003!2d12.613210378407354!3d56.03449117819393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465231e4eaf4712b%3A0xd226e0856478d306!2sToldkammeret!5e0!3m2!1sen!2sdk!4v1777977527643!5m2!1sen!2sdk"
+          width="400"
+          height="300"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="my-6 w-full md:col-start-2 md:row-start-2"
+        ></iframe>
       </div>
 
       {/* FAQ */}
