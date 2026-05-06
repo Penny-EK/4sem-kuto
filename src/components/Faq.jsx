@@ -16,7 +16,7 @@ const Faq = ({ children, title }) => {
         onClick={() => setOpen((s) => !s)}
         aria-expanded={open}
         aria-controls={id}
-        className="flex w-full items-center justify-between py-2"
+        className="flex w-full cursor-pointer items-center justify-between py-2"
       >
         {/* Click to expand/collapse */}
         <h3 className="text-left">{title}</h3>
