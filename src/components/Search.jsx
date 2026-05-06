@@ -5,6 +5,7 @@ export default function Search({
   value,
   onChange,
   className = "",
+  placeholder = "Søg i indhold...",
 }) {
   const handleChange = (event) => {
     onChange(event.target.value);
@@ -18,7 +19,7 @@ export default function Search({
       <input
         id={id}
         type="search"
-        placeholder="Type here..."
+        placeholder={placeholder}
         value={value}
         onChange={handleChange}
         className="h-10 w-full rounded-[5px] border border-slate-300 bg-white px-4 text-sm text-slate-900 transition outline-none placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"

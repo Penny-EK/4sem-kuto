@@ -9,6 +9,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "via.ritzau.dk",
+      },
+      {
+        protocol: "https",
         hostname: "kuto.dk",
       },
       {
