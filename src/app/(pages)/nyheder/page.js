@@ -28,6 +28,7 @@ export default async function Home() {
             <EventCard
               key={article.id}
               id={article.id}
+              slug={article.slug}
               image={article.article_picture}
               title={article.article_title}
               date={article.article_date}

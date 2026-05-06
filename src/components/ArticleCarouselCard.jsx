@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ArticleCarouselCard = ({ article }) => {
+  const articlePath = article.slug || article.id;
+
   return (
-    <Link href={`/nyhed_artikel/${article.id}`} className="block">
+    <Link href={`/nyhed_artikel/${articlePath}`} className="block">
       <article className="grid w-59 gap-3">
         {article.article_picture ? (
           <Image

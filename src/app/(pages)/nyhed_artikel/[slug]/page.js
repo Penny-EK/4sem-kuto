@@ -1,17 +1,16 @@
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
-import Label from "@/components/Label";
 
 export default async function Singleview({ params }) {
-  const { id } = await params;
+  const { slug } = await params;
 
   const { data: article, error } = await supabase
     .from("articles")
     .select("*")
-    .eq("id", id)
+    .eq("slug", slug)
     .maybeSingle();
 
-  console.log("ID:", id);
+  console.log("SLUG:", slug);
   console.log("article:", article);
   console.log("ERROR:", error);
 
@@ -20,7 +19,7 @@ export default async function Singleview({ params }) {
   }
 
   return (
-    <main className="m-auto grid w-[90vw] max-w-400 grid-cols-1">
+    <main className="max-w-400 md:m-auto md:grid md:grid-cols-1">
       {article.article_picture && (
         <Image
           src={article.article_picture}
@@ -30,7 +29,7 @@ export default async function Singleview({ params }) {
           className="h-auto max-h-100 w-full object-cover"
         />
       )}
-      <div className="md:border-foreground md:order-first md:mb-4 md:flex md:flex-row-reverse md:items-end md:justify-end md:gap-4 md:border-b md:pb-4">
+      <div className="md:border-foreground m-auto w-[90vw] md:order-first md:mb-4 md:flex md:flex-row-reverse md:items-end md:justify-end md:gap-4 md:border-b md:pb-4">
         <p className="font-['Open_Sans'] text-xs font-semibold text-black">
           {article.article_date}
         </p>
@@ -38,7 +37,7 @@ export default async function Singleview({ params }) {
       </div>
 
       {article.article_bold && (
-        <section className="m-auto max-w-300">
+        <section className="m-auto w-[90vw] max-w-300">
           <p className="py-7 font-bold">{article.article_bold}</p>
           <p>{article.article_paragraf}</p>
         </section>

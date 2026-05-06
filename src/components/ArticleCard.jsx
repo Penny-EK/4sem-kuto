@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ArticleCard = ({ id, image, title, date }) => {
+const ArticleCard = ({ id, slug, image, title, date }) => {
+  const articlePath = slug || id;
+
   return (
     <article className="mb-6">
-      <Link href={`/nyhed_artikel/${id}`}>
+      <Link href={`/nyhed_artikel/${articlePath}`}>
         <div className="flex items-end justify-end">{date}</div>
         {image ? (
           <Image
