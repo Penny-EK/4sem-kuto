@@ -38,8 +38,10 @@ export default async function Singleview({ params }) {
 
       {article.article_bold && (
         <section className="m-auto w-[90vw] max-w-300">
-          <p className="py-7 font-bold">{article.article_bold}</p>
-          <p>{article.article_paragraf}</p>
+          <div className="py-7 font-bold whitespace-pre-line">
+            {article.article_bold}
+          </div>
+          <div className="whitespace-pre-line">{article.article_paragraf}</div>
         </section>
       )}
     </main>
