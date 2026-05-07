@@ -41,6 +41,33 @@ body {
   font-family: var(--font-body);
 }
 
+body {
+  /* layout setup */
+  --side-space: clamp(1.2rem, 7vw, 3.5rem);
+  --wide: minmax(var(--side-space), 1fr);
+  --main: min(1200px, calc(100% - var(--side-space) * 2));
+  --highlight: minmax(0, 7.5rem);
+  display: grid;
+  grid-template-columns:
+    [edge-start] var(--wide)
+    [breakout-start] var(--highlight)
+    [main-start] var(--main) [main-end]
+    var(--highlight) [breakout-end]
+    var(--wide) [edge-end];
+}
+
+.main {
+  grid-column: main;
+}
+
+.breakout {
+  grid-column: breakout;
+}
+
+.full {
+  grid-column: edge;
+}
+
 /* =========================
    TYPOGRAPHY (MOBILE FIRST)
 ========================= */

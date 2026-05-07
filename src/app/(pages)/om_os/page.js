@@ -7,18 +7,15 @@ import TKbuilding from "@/assets/TK-building.png";
 // components
 import EmployeeListContainer from "@/components/EmployeeListContainer";
 import Faq from "@/components/Faq";
+import SectionWrapper from "@/components/SectionWrapper";
 
 // Icons
 
 export default async function OmOs() {
-  const gap = "1.5rem"; // gap-6 = 1.5rem
-  const maxWidthStyle = { maxWidth: `calc(1200px / 2 - ${gap})` };
   return (
-    <main>
-      <div className="grid-cols-2 md:grid">
-        <h1 style={maxWidthStyle} className="m-auto w-[90vw] max-w-300">
-          To huse – én organisation
-        </h1>
+    <main className="contents">
+      <SectionWrapper padding="py-0" innerClass="md:grid-cols-2 md:grid ">
+        <h1 className="">To huse – én organisation</h1>
 
         <ul className="my-9.25 ml-17.5 grid gap-3 rounded-tl-[5px] rounded-bl-[5px] bg-[#1B1B1B] py-6 pl-8 text-white">
           <li>
@@ -38,13 +35,14 @@ export default async function OmOs() {
             <a href="#employeeSection">Medarbejdere</a>
           </li>
         </ul>
-      </div>
+      </SectionWrapper>
 
-      <div id="kvSection" className="gap-6 py-9.25 md:grid md:grid-cols-2">
-        <div
-          style={maxWidthStyle}
-          className="m-auto w-[90vw] max-w-300 md:w-full"
-        >
+      <SectionWrapper
+        id="kvSection"
+        outerClass="md:grid md:grid-cols-1"
+        innerClass="gap-6 md:grid md:grid-cols-2"
+      >
+        <div className="md:max-w-[576px]">
           <h2>Kulturværftet</h2>
           <p>
             Kulturværftet er et moderne kulturcenter og et regionalt spillested
@@ -59,12 +57,10 @@ export default async function OmOs() {
             festivaler og events.
           </p>
         </div>
-        <Image src={KVbuilding} alt="Kulturværftet" className="my-6" />
+        <Image src={KVbuilding} alt="Kulturværftet" />
+        {/* </div> */}
 
-        <div
-          style={maxWidthStyle}
-          className="m-auto w-[90vw] max-w-300 md:col-start-2 md:row-start-2 md:w-full"
-        >
+        <div className="">
           <h3>Adresse</h3>
           <p>Allegade 2, 3000 Helsingør</p>
           <h3>Åbningstider</h3>
@@ -87,16 +83,16 @@ export default async function OmOs() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="my-6 w-full"
+          className=""
         ></iframe>
-      </div>
+      </SectionWrapper>
 
       {/* Toldkammeret */}
-      <div id="tkSection" className="gap-6 py-9.25 md:grid md:grid-cols-2">
-        <div
-          style={maxWidthStyle}
-          className="m-auto w-[90vw] max-w-300 md:col-start-2 md:row-start-1 md:w-full"
-        >
+      <SectionWrapper
+        id="tkSection"
+        innerClass="gap-6 py-9.25 md:grid md:grid-cols-2"
+      >
+        <div>
           <h2>Toldkammeret</h2>
           <p>
             Toldkammeret er KUTO’s uformelle samlingspunkt for fællesskab og
@@ -110,10 +106,7 @@ export default async function OmOs() {
           </p>
         </div>
         <Image src={TKbuilding} alt="Toldkammeret" className="my-6" />
-        <div
-          style={maxWidthStyle}
-          className="m-auto w-[90vw] max-w-300 md:col-start-1 md:row-start-2 md:w-full"
-        >
+        <div className="m-auto w-[90vw] max-w-300 md:col-start-1 md:row-start-2 md:w-full">
           <h3>Adresse</h3>
           <p>Havnepladsen 1, 3000 Helsingør</p>
           <h3>Åbningstider</h3>
@@ -131,12 +124,11 @@ export default async function OmOs() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="my-6 w-full md:col-start-2 md:row-start-2"
         ></iframe>
-      </div>
+      </SectionWrapper>
 
       {/* FAQ */}
-      <section id="faqSection" className="my-9.25 bg-[#F9F9F9] py-9.25">
+      <SectionWrapper id="faqSection" outerClass=" bg-[#F9F9F9]">
         <div className="m-auto w-[90vw] max-w-300">
           <h2>FAQ</h2>
           <h3>- Ofte stillet spørgsmål</h3>
@@ -159,9 +151,9 @@ export default async function OmOs() {
             </p>
           </Faq>
         </div>
-      </section>
+      </SectionWrapper>
 
-      <div id="contactSection" className="m-auto w-[90vw] max-w-300 py-9.25">
+      <SectionWrapper id="contactSection">
         <h2>Kontakt</h2>
         <dl className="grid gap-6 md:grid-cols-3">
           <div className="contents gap-6 md:grid">
@@ -214,11 +206,11 @@ export default async function OmOs() {
             </div>
           </div>
         </dl>
-      </div>
+      </SectionWrapper>
       {/* employee list */}
-      <div id="employeeSection" className="m-auto w-[90vw] max-w-300 py-9.25">
+      <SectionWrapper id="employeeSection">
         <EmployeeListContainer />
-      </div>
+      </SectionWrapper>
     </main>
   );
 }
