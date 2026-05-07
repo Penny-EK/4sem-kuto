@@ -7,7 +7,7 @@ export default async function Singleview({ params }) {
   const { data: article, error } = await supabase
     .from("articles")
     .select("*")
-    .eq("slug", slug)
+    .eq("article_slug", slug)
     .maybeSingle();
 
   console.log("SLUG:", slug);

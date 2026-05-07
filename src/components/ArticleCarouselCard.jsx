@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ArticleCarouselCard = ({ article }) => {
-  const articlePath = article.slug || article.id;
+  const articlePath = article.article_slug || article.id;
 
   return (
     <Link href={`/nyhed_artikel/${articlePath}`} className="block">

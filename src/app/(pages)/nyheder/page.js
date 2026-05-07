@@ -23,13 +23,13 @@ export default async function Home() {
         <Search placeholder="Søg i nyheder..." />
         <section className="mt-6 grid gap-6 md:grid-cols-3">
           {!articles || articles.length === 0 ? (
-            <p>Ingen articler fundet</p>
+            <p>Ingen artikler fundet</p>
           ) : (
             articles.map((article) => (
               <EventCard
                 key={article.id}
                 id={article.id}
-                slug={article.slug}
+                slug={article.article_slug}
                 image={article.article_picture}
                 title={article.article_title}
                 date={article.article_date}
