@@ -39,28 +39,34 @@ export default async function OmOs() {
 
       <SectionWrapper
         id="kvSection"
-        outerClass="md:grid md:grid-cols-1"
-        innerClass="gap-6 md:grid md:grid-cols-2"
+        outerClass=""
+        gridPosition="col-[main] md:col-start-[main-start] md:col-end-[edge-end]"
       >
-        <div className="md:max-w-[576px]">
-          <h2>Kulturværftet</h2>
-          <p>
-            Kulturværftet er et moderne kulturcenter og et regionalt spillested
-            centralt placeret i Kulturhavn Kronborg i Helsingør Kommune.
-          </p>
-          <p>
-            Året rundt præsenterer Kulturværftet et bredt og mangfoldigt
-            kulturelt program fra koncerter, foredrag, debatter, film, teater,
-            familiearrangementer, værksteder, udstillinger samt møder og
-            konferencer for erhvervslivet over til tv- og filmproduktioner,
-            profilskabende begivenheder som internationalt orienterede
-            festivaler og events.
-          </p>
-        </div>
-        <Image src={KVbuilding} alt="Kulturværftet" />
-        {/* </div> */}
+        <div className="md:col-start-1 md:col-end-4 md:grid md:grid-cols-2">
+          <div className="md:col-start-1 md:col-end-2">
+            <h2>Kulturværftet</h2>
+            <p>
+              Kulturværftet er et moderne kulturcenter og et regionalt
+              spillested centralt placeret i Kulturhavn Kronborg i Helsingør
+              Kommune.
+            </p>
+            <p>
+              Året rundt præsenterer Kulturværftet et bredt og mangfoldigt
+              kulturelt program fra koncerter, foredrag, debatter, film, teater,
+              familiearrangementer, værksteder, udstillinger samt møder og
+              konferencer for erhvervslivet over til tv- og filmproduktioner,
+              profilskabende begivenheder som internationalt orienterede
+              festivaler og events.
+            </p>
+          </div>
 
-        <div className="">
+          <Image
+            src={KVbuilding}
+            alt="Kulturværftet"
+            className="md:col-start-2 md:col-end-4 md:w-full"
+          />
+        </div>
+        {/* <div className="md:grid md:grid-cols-2">
           <h3>Adresse</h3>
           <p>Allegade 2, 3000 Helsingør</p>
           <h3>Åbningstider</h3>
@@ -74,7 +80,7 @@ export default async function OmOs() {
           </ul>
         </div>
 
-        {/* Google maps embed */}
+      
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4458.100851313558!2d12.609252440008527!3d56.035115739487665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46523111936d2171%3A0xf3cbcf3b60041cfd!2sThe%20Culture%20Yard!5e0!3m2!1sen!2sdk!4v1777977213774!5m2!1sen!2sdk"
           width="400"
@@ -84,7 +90,7 @@ export default async function OmOs() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           className=""
-        ></iframe>
+        ></iframe> */}
       </SectionWrapper>
 
       {/* Toldkammeret */}
