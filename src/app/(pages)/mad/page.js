@@ -69,7 +69,9 @@ export default async function Mad() {
         Spisehuset leverer også forplejning til Kulturværftets mødegæster og til udvalgte arrangementer er det muligt at tilkøbe mad inden koncerter,  teater og shows. Du kan tilkøbe mad sammen med billetter.
         </p>
         <div className="">
+        <Link href="/?menu=true">
           <Button>Se arrangementer med menu</Button>
+          </Link>
           </div>
         
       </div>
