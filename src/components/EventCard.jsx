@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Label from "@/components/Label";
 
 
 const EventCard = ({ id, image, title, date, time, location, building, price }) => {
@@ -9,9 +10,7 @@ const EventCard = ({ id, image, title, date, time, location, building, price }) 
       <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
         <small className="rounded bg-white/90 px-2 py-1">{date}</small>
 
-        <small className="rounded-md bg-yellow-300 px-3 py-1 uppercase">
-          {building || "Lokation"}
-        </small>
+        <Label>{location}</Label>
       </div>
 
       <div className="relative mx-auto h-[220px] w-[90%] overflow-hidden rounded-2xl">

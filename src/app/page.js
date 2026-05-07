@@ -29,6 +29,7 @@ export default async function Home() {
             location={event.event_location}
             building={event.event_building}
             price={event.event_price}
+            category={event.event_category}
           />
         ))
       )}
