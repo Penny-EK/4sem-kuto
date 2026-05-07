@@ -92,7 +92,7 @@ const Header = () => {
             {isMenuOpen && (
               <div
                 id="header-menu-panel"
-                className="absolute top-0 right-0 h-dvh w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
+                className="absolute top-0 right-0 z-100 h-dvh w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
               >
                 <div className="flex justify-end">
                   <button
