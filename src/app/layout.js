@@ -2,6 +2,7 @@ import "./globals.css";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SectionWrapper from "@/components/SectionWrapper";
 import { Raleway, Open_Sans } from "next/font/google";
 
 const raleway = Raleway({
@@ -26,9 +27,13 @@ export default function RootLayout({ children }) {
       className={`${raleway.className} ${openSans.className} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Header />
+        <SectionWrapper>
+          <Header />
+        </SectionWrapper>
         {children}
-        <Footer />
+        <SectionWrapper>
+          <Footer />
+        </SectionWrapper>
       </body>
     </html>
   );
