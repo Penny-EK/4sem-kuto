@@ -20,14 +20,14 @@ export default async function Forside() {
   return (
     <main>
       {/* HERO */}
-      <section className="flex flex-col md:mx-auto md:mt-10 md:grid md:w-[75%] md:grid-cols-[320px_80px_1fr] md:items-center md:gap-10">
+      <section className="flex flex-col md:mx-auto md:mb-30 md:grid md:w-[75%] md:grid-cols-[320px_80px_1fr] md:items-center md:gap-10">
         <div className="m-4 flex gap-6 md:contents md:m-0">
           <Image
             src="/forsideImage.png"
             alt="Kulturværftet"
             width={800}
             height={1200}
-            className="h-[75vh] w-[60%] object-cover md:col-start-1 md:h-[470px] md:w-full"
+            className="h-[75vh] w-[60%] object-cover md:col-start-1 md:h-[580px] md:w-full"
           />
 
           <div className="flex items-center md:col-start-2">
@@ -39,8 +39,7 @@ export default async function Forside() {
 
         <div className="m-8 text-center md:col-start-3 md:m-0 md:text-left">
           <h2>
-            Kulturværftet: Din destination for oplevelser i hjertet af
-            Helsingør.
+          Kulturværftet: Din destination for oplevelser i hjertet af Helsingør. Et pulserende kulturcentrum og regionalt spillested i Kulturhavn Kronborg.
           </h2>
         </div>
       </section>
