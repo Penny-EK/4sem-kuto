@@ -12,15 +12,22 @@ const EventCard = ({
   price,
 }) => {
   return (
-    <Link href={`/event/${id}`} className="block">
-      <article className="mb-6 border-b border-neutral-200 pb-6">
-        <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
-          <small className="rounded bg-white/90 px-2 py-1">{date}</small>
+    <Link href={`/event/${id}`} className="block h-full">
+      <article className="flex h-[310px] flex-col pb-6">
 
-          <Label variant="location">{location || "Lokation"}</Label>
+        {/* TOP */}
+        <div className="mx-auto mb-2 flex w-[90%] items-center justify-between">
+          <small className="rounded bg-white/90 px-2 py-1">
+            {date}
+          </small>
+
+          <Label variant="location">
+            {location || "Lokation"}
+          </Label>
         </div>
 
-        <div className="relative mx-auto h-[220px] w-[90%] overflow-hidden rounded-2xl">
+        {/* IMAGE */}
+        <div className="relative mx-auto h-[300px] w-[90%] overflow-hidden rounded-2xl">
           {image && (
             <Image
               src={image}
@@ -31,14 +38,19 @@ const EventCard = ({
           )}
         </div>
 
-        <div className="mx-auto mt-3 w-[90%]">
-          <h3 className="mb-2">{title}</h3>
+        {/* CONTENT */}
+        <div className="mx-auto mt-3 flex h-full w-[90%] flex-col">
+          
+          <h3 className="mb-2 line-clamp-2">
+            {title}
+          </h3>
 
           <small>
             {time} · {date} · {location}
           </small>
 
-          <div className="mt-2 flex w-full items-center justify-between">
+          {/* BOTTOM */}
+          <div className="mt-auto flex w-full items-center justify-between pt-4">
             {price && <small>{price}</small>}
 
             <span className="button-text underline underline-offset-4">
