@@ -2,99 +2,158 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
-export default function Search({ type = "all" }) {
-  type = type.toLowerCase(); // Normalize the type to lowercase for easier comparisons.
+export default function Search({
+  type = "all",
+  placeholder: customPlaceholder,
+}) {
+  type = type.toLowerCase(); // Normalize the type for easier comparisons.
+
+  // Use a custom placeholder when provided, otherwise fall back to a type-based label.
+  const placeholder =
+    customPlaceholder ||
+    (type === "articles"
+      ? "Søg i nyheder..."
+      : type === "events"
+        ? "Søg i events..."
+        : `Søg i ${type === "all" ? "nyheder og events" : type}...`);
 
   const [articles, setArticles] = useState([]);
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showEmptyState, setShowEmptyState] = useState(false);
+
+  useEffect(() => {
+    const queryText = searchQuery.trim();
+
+    if (queryText.length < 3) {
+      setShowEmptyState(false);
+      return;
+    }
+
+    if (articles.length === 0 && events.length === 0) {
+      const timeoutId = window.setTimeout(() => {
+        setShowEmptyState(true);
+      }, 2000);
+
+      return () => window.clearTimeout(timeoutId);
+    }
+
+    setShowEmptyState(false);
+  }, [articles, events, searchQuery]);
 
   useEffect(() => {
     const loadData = async () => {
-      // Load articles if type is "all" or "articles"
-      if (type === "all" || type === "articles") {
-        const { data } = await supabase
-          .from("articles")
-          .select("*")
-          .order("article_date", { ascending: false });
-        setArticles(data || []);
+      const queryText = searchQuery.trim();
+      // Used to exclude events that have already passed.
+      const now = new Date().toISOString();
+
+      // Wait until the user has entered at least 3 non-space characters.
+      if (queryText.length < 3) {
+        setArticles([]);
+        setEvents([]);
+        setShowEmptyState(false);
+        return;
       }
 
-      // Load events if type is "all" or "events"
+      setShowEmptyState(false);
+
+      // Search articles in Supabase using full-text search first, then fall back if needed.
+      if (type === "all" || type === "articles") {
+        const { data, error } = await supabase
+          .from("articles")
+          .select("*")
+          .textSearch("fts", queryText, {
+            type: "websearch",
+            config: "english",
+          })
+          .order("article_date", { ascending: false });
+
+        if (data && data.length > 0) {
+          setArticles(data);
+        } else {
+          const { data: fallbackData, error: fallbackError } = await supabase
+            .from("articles")
+            .select("*")
+            .or(
+              `article_title.ilike.%${queryText}%,article_paragraf.ilike.%${queryText}%,article_bold.ilike.%${queryText}%`,
+            )
+            .order("article_date", { ascending: false });
+
+          setArticles(fallbackData || []);
+        }
+      } else {
+        setArticles([]);
+      }
+
+      // Search only upcoming events in Supabase using full-text search first, then fall back if needed.
       if (type === "all" || type === "events") {
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from("events")
           .select("*")
+          .textSearch("fts", queryText, {
+            type: "websearch",
+            config: "english",
+          })
+          .gte("event_date", now)
           .order("event_date", { ascending: false });
-        setEvents(data || []);
+
+        if (data && data.length > 0) {
+          setEvents(data);
+        } else {
+          const { data: fallbackData, error: fallbackError } = await supabase
+            .from("events")
+            .select("*")
+            .or(
+              `event_name.ilike.%${queryText}%,event_description.ilike.%${queryText}%`,
+            )
+            .gte("event_date", now)
+            .order("event_date", { ascending: false });
+
+          setEvents(fallbackData || []);
+        }
+      } else {
+        setEvents([]);
       }
     };
 
     loadData();
-  }, [type]);
-
-  // Filter articles based on search query (only if 3+ characters)
-  const filteredArticles =
-    type === "events" || searchQuery.length < 3
-      ? []
-      : searchQuery
-        ? articles.filter((article) => {
-            const query = searchQuery.toLowerCase();
-            return (
-              (article.article_title || "").toLowerCase().includes(query) ||
-              (article.article_paragraf || "").toLowerCase().includes(query) ||
-              (article.article_bold || "").toLowerCase().includes(query)
-            );
-          })
-        : articles;
-
-  // Filter events based on search query (only if 3+ characters)
-  const filteredEvents =
-    type === "articles" || searchQuery.length < 3
-      ? []
-      : searchQuery
-        ? events.filter((event) => {
-            const query = searchQuery.toLowerCase();
-            return (
-              (event.event_title || "").toLowerCase().includes(query) ||
-              (event.event_description || "").toLowerCase().includes(query)
-            );
-          })
-        : events;
+  }, [type, searchQuery]);
 
   return (
-    <div>
-      {/* Search field that updates the local state on every keystroke. */}
+    <div className="relative">
+      {/* Search field that triggers backend searches after the minimum query length is met. */}
       <input
         type="text"
-        placeholder="Search"
+        placeholder={placeholder}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="h-10 w-full rounded-[5px] border border-slate-300 bg-white px-4 text-sm text-slate-900 transition outline-none placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
       />
-
-      {/* Only show the result list after 3 characters have been typed. */}
-      {searchQuery.length >= 3 && (
-        <ul className="grid gap-6">
-          {filteredArticles.length === 0 && filteredEvents.length === 0 ? (
-            // This message appears when no results match the current query.
+      {/* Only show results after 3 non-space characters have been entered. */}
+      {searchQuery.trim().length >= 3 && (
+        <ul className="absolute top-full left-0 mt-2 grid max-h-80 w-full gap-6 overflow-y-auto rounded-md border border-slate-300 bg-white p-4 shadow-lg">
+          {showEmptyState ? (
+            // This message appears 2 seconds after the search settles with no results.
             <li>Ingen resultater fundet</li>
           ) : (
             <>
               {/* Render matching events */}
-              {filteredEvents.map((event) => (
-                <li key={`event-${event.id}`} className="border-b">
+              {events.map((event) => (
+                <li
+                  key={`event-${event.id}`}
+                  className="border-b border-slate-300"
+                >
                   <a href={`event/${event.id}`}>
-                    <p className="font-bold">{event.event_title}</p>
-                    <span className="line-clamp-2">
-                      {event.event_description}
-                    </span>
+                    <p className="font-bold">{event.event_name}</p>
                   </a>
                 </li>
               ))}
               {/* Render matching articles */}
-              {filteredArticles.map((article) => (
-                <li key={`article-${article.id}`} className="border-b">
+              {articles.map((article) => (
+                <li
+                  key={`article-${article.id}`}
+                  className="border-b border-slate-300"
+                >
                   <a href={`nyhed_artikel/${article.article_slug}`}>
                     <p className="font-bold">{article.article_title}</p>
                     <span className="line-clamp-2">{article.article_bold}</span>

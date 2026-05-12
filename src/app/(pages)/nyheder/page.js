@@ -19,7 +19,7 @@ export default async function Home() {
       </SectionWrapper>
       <SectionWrapper>
         <Suspense fallback={<p>Indlæser nyheder...</p>}>
-          <Search placeholder="Søg i nyheder..." />
+          <Search type="articles" />
           <section className="mt-6 grid gap-6 md:grid-cols-3">
             {!articles || articles.length === 0 ? (
               <p>Ingen artikler fundet</p>

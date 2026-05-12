@@ -25,7 +25,7 @@ const Header = () => {
   function HeaderLinks({ children, href }) {
     return (
       <a
-        className="flex items-center justify-start gap-2 font-['Raleway'] text-3xl font-bold uppercase transition duration-300 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4"
+        className="flex cursor-pointer items-center justify-start gap-2 font-['Raleway'] text-3xl font-bold uppercase transition duration-300 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4"
         href={href}
       >
         {children}
@@ -57,7 +57,7 @@ const Header = () => {
           {/* opening hours */}
           <OpeningHours title="Åbningstider" type="nav" />
           {/* search button */}
-          <div className="flex items-center gap-3">
+          <div className="grid items-center gap-3">
             <button
               type="button"
               onClick={() => setIsSearchOpen((currentOpen) => !currentOpen)}
