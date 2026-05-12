@@ -67,19 +67,19 @@ const EventCarousel = ({ events = [] }) => {
         </div>
       </div>
 
-      <div
-        ref={trackRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2"
-      >
-       {events.slice(0, 8).map((event) => (
-  <div key={event.id} className="min-w-59 snap-start">
-    <EventCarouselCard event={event} />
-    
-  </div>
-  
-))}
-
+    <div className="overflow-x-auto pb-2">
+  <div
+    ref={trackRef}
+    className="flex w-[calc(100%+5vw)] snap-x snap-mandatory gap-4 scroll-smooth md:w-[calc(100%+12.5vw)]"
+  >
+    {events.slice(0, 8).map((event) => (
+      <div key={event.id} className="min-w-59 snap-start">
+        <EventCarouselCard event={event} />
       </div>
+    ))}
+  </div>
+</div>
+
       <div className="flex justify-end m-4">
         
         <Link href="/">

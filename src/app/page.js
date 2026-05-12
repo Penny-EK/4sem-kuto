@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabaseClient";
 import EventCard from "@/components/EventCard";
 import Image from "next/image";
 import Label from "@/components/Label";
+import SectionWrapper from "@/components/SectionWrapper";
 
 function startOfDay(date) {
   const d = new Date(date);
@@ -26,7 +27,8 @@ function getEventGroup(eventDateString) {
   if (eventDate.getTime() === today.getTime()) return "I dag";
   if (eventDate.getTime() === tomorrow.getTime()) return "I morgen";
   if (eventDate > tomorrow && eventDate <= endOfNextWeek) return "Næste uge";
-  if (eventDate > endOfNextWeek && eventDate <= endOfNextMonth) return "Næste måned";
+  if (eventDate > endOfNextWeek && eventDate <= endOfNextMonth)
+    return "Næste måned";
 
   return "Senere";
 }
@@ -46,7 +48,7 @@ export default async function Home() {
     "I morgen": [],
     "Næste uge": [],
     "Næste måned": [],
-    "Senere": [],
+    Senere: [],
   };
 
   events?.forEach((event) => {
@@ -57,19 +59,25 @@ export default async function Home() {
   const heroEvent = events?.[0];
 
   return (
-    <main>
+    <main className="contents">
       {/* DESKTOP HERO */}
       {heroEvent && (
-        <section className="mx-auto mt-10 hidden w-[75%] grid-cols-[220px_1fr] items-center gap-8 md:grid">
+        <SectionWrapper
+          padding="py-0"
+          outerClass="hidden md:grid"
+          innerClass="md:grid md:grid-cols-[220px_1fr] md:items-center md:gap-8"
+          gridPosition="col-[main] md:col-start-[main-start] md:col-end-[edge-end]"
+        >
           <div>
             <h2>{heroEvent.event_name}</h2>
             <p>{heroEvent.event_date}</p>
+
             <Label variant="location">
               {heroEvent.event_location || "Lokation"}
             </Label>
           </div>
 
-          <div className="relative h-[420px] w-full overflow-hidden">
+          <div className="relative h-[420px] w-[90%] overflow-hidden">
             <Image
               src={heroEvent.event_img}
               alt={heroEvent.event_name}
@@ -77,39 +85,42 @@ export default async function Home() {
               className="object-cover"
             />
           </div>
-        </section>
+        </SectionWrapper>
       )}
 
       {Object.entries(groupedEvents).map(([groupName, groupEvents]) => {
         if (groupEvents.length === 0) return null;
 
         return (
-          <section key={groupName} className="my-10">
-            <div className="mb-8">
-              <h2 className="mx-auto w-[90%] uppercase md:w-[75%]">
-                {groupName}
-              </h2>
+          <SectionWrapper
+          key={groupName}
+          padding="py-9.25"
+          gridPosition="col-[main]"
+          innerClass="gap-8"
+        >
+         <div className="w-full">
+  <h2 className="uppercase">{groupName}</h2>
 
-              <div className="ml-5 h-px w-full bg-black md:ml-[12.5%] md:w-[87.5%]" />
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:ml-auto md:mr-0 md:w-[82%] md:grid-cols-3">
-              {groupEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  id={event.id}
-                  image={event.event_img}
-                  title={event.event_name}
-                  date={event.event_date}
-                  time={event.event_time}
-                  location={event.event_location}
-                  building={event.event_building}
-                  price={event.event_price}
-                  category={event.event_category}
-                />
-              ))}
-            </div>
-          </section>
+  <div className="mt-2 h-px w-screen bg-black md:relative md:left-0" />
+</div>
+        
+          <div className="grid grid-cols-1 gap-6 md:ml-auto md:w-[88%] md:grid-cols-3 md:gap-x-8 md:gap-y-14">
+            {groupEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                id={event.id}
+                image={event.event_img}
+                title={event.event_name}
+                date={event.event_date}
+                time={event.event_time}
+                location={event.event_location}
+                building={event.event_building}
+                price={event.event_price}
+                category={event.event_category}
+              />
+            ))}
+          </div>
+        </SectionWrapper>
         );
       })}
     </main>
