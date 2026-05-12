@@ -37,7 +37,7 @@ export default function OpeningHours({ title, type }) {
         type="button"
         onClick={toggleDropdown}
         aria-expanded={isOpen}
-        className="transition duration-200 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4"
+        className="curver-pointer transition duration-200 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4"
       >
         Åbningstider
       </button>
