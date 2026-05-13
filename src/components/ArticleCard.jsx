@@ -22,7 +22,7 @@ const ArticleCard = ({ id, slug, image, title, date }) => {
             aria-label="No article image"
           />
         )}
-        <h2 className="mt-4 text-lg font-semibold">{title}</h2>
+        <h3 className="mt-4 text-lg font-semibold">{title}</h3>
         <div className="flex items-end justify-end">
           <button className="underline underline-offset-4">LÆS MERE</button>
         </div>
