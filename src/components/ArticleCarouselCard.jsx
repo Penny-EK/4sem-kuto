@@ -6,7 +6,7 @@ const ArticleCarouselCard = ({ article }) => {
 
   return (
     <Link href={`/nyhed_artikel/${articlePath}`} className="block">
-      <article className="grid w-59 gap-3">
+      <article className="grid w-65 gap-3">
         {article.article_picture ? (
           <Image
             src={article.article_picture}
@@ -17,11 +17,11 @@ const ArticleCarouselCard = ({ article }) => {
           />
         ) : (
           <div
-            className="aspect-video h-auto w-59 bg-gray-300"
+            className="aspect-video h-auto w-full bg-gray-300"
             aria-label="No article image"
           />
         )}
-        <h2>{article.article_title}</h2>
+        <h3 className="">{article.article_title}</h3>
         <p className="line-clamp-5">{article.article_bold}</p>
       </article>
     </Link>
