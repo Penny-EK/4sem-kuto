@@ -73,7 +73,7 @@ export default async function Home() {
                 <div key={group}>
                   <div className="my-8 w-full">
                     <h2 className="uppercase">{group}</h2>
-                    <div className="mt-2 h-px w-screen bg-black md:relative md:left-0" />
+                    <div className="mt-2 h-px w-screen bg-black md:left-0" />
                   </div>
                   <section className="grid gap-6 md:grid-cols-3">
                     {groupArticles.map((article) => (
