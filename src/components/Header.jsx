@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Assets
 import Image from "next/image";
@@ -17,16 +18,28 @@ import OpeningHours from "./OpeningHours";
 import Search from "@/components/Search";
 
 const Header = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const menuRef = useRef(null);
 
-  function HeaderLinks({ children, href }) {
+  const navLinks = [
+    { href: "/forside", text: "Forside" },
+    { href: "/", text: "Kalender" },
+    { href: "/nyheder", text: "Nyheder" },
+    { href: "/mad", text: "Mad" },
+    { href: "/om_os", text: "Om os / kontakt" },
+    { href: "/liveforbundet", text: "Liveforbundet" },
+  ];
+
+  function HeaderLinks({ children, href, className = "", style }) {
+    const isActive = pathname === href;
     return (
       <a
-        className="flex cursor-pointer items-center justify-start gap-2 font-['Raleway'] text-3xl font-bold uppercase transition duration-300 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4"
+        className={`flex cursor-pointer items-center justify-start gap-2 font-['Raleway'] text-3xl font-bold uppercase transition duration-300 hover:underline hover:decoration-[#FF8080] hover:decoration-2 hover:underline-offset-4 ${isActive ? "underline decoration-[#fc5757] decoration-2 underline-offset-4" : ""} ${className} ${pathname === "/liveforbundet" ? "text-white" : ""}`}
         href={href}
+        style={style}
       >
         {children}
       </a>
@@ -48,36 +61,33 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="header mx-9.5 my-5.75">
+    <header
+      className={`header z-50 my-5.75 ${pathname === "/liveforbundet" ? "text-white" : "text-black"}`}
+    >
       <div className="flex items-start justify-between gap-5 md:items-center">
-        <a href="/">
+        <a href="/forside">
           <Image src={logo} alt="Logo" width={120} height={120} />
         </a>
+        {/* show opening hours if not on liveforbundet page */}
         <div className="flex flex-1 items-center justify-end gap-5">
-          {/* opening hours */}
-          <OpeningHours title="Åbningstider" type="nav" />
-          {/* search button */}
-          <div className="grid items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setIsSearchOpen((currentOpen) => !currentOpen)}
-              aria-expanded={isSearchOpen}
-              aria-controls="header-search-panel-desktop header-search-panel-mobile"
-              className="inline-flex h-10 w-10 items-center justify-center leading-none transition duration-200 hover:opacity-70"
-            >
-              <IoSearch size={25} />
-            </button>
-            {isSearchOpen && (
-              <div id="header-search-panel-desktop" className="hidden md:block">
-                <Search
-                  id="header-search-input-desktop"
-                  value={searchValue}
-                  onChange={setSearchValue}
-                  className="w-72"
-                />
-              </div>
-            )}
-          </div>
+          {pathname !== "/liveforbundet" && (
+            <OpeningHours title="Åbningstider" type="nav" />
+          )}
+          {/* show search button if not on liveforbundet page */}
+          {pathname !== "/liveforbundet" && (
+            <div className="grid items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setIsSearchOpen((currentOpen) => !currentOpen)}
+                aria-expanded={isSearchOpen}
+                aria-controls="header-search-panel-desktop header-search-panel-mobile"
+                className="inline-flex h-10 w-10 items-center justify-center leading-none transition duration-200 hover:opacity-70"
+              >
+                <IoSearch size={25} />
+              </button>
+            </div>
+          )}
+          {pathname == "/liveforbundet" && <a>Kuto.dk</a>}
           <div ref={menuRef}>
             {/* menu button */}
             <button
@@ -92,7 +102,7 @@ const Header = () => {
             {isMenuOpen && (
               <div
                 id="header-menu-panel"
-                className="absolute top-0 right-0 z-100 h-dvh w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
+                className="animate-slide-in-right absolute top-0 right-0 z-100 h-dvh w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
               >
                 <div className="flex justify-end">
                   <button
@@ -103,18 +113,35 @@ const Header = () => {
                     <IoCloseSharp size={25} />
                   </button>
                 </div>
+
+                {/* burgermenu */}
                 <nav className="mb-6 flex flex-col gap-5">
-                  <HeaderLinks href="/forside">Forside</HeaderLinks>
-                  <HeaderLinks href="/">Kalender</HeaderLinks>
-                  <HeaderLinks href="/nyheder">Nyheder</HeaderLinks>
-                  <HeaderLinks href="/mad">Mad</HeaderLinks>
-                  <HeaderLinks href="/om_os">Om os</HeaderLinks>
-                  <HeaderLinks href="/om_os">Kontakt</HeaderLinks>
-                  <HeaderLinks href="/liveforbundet">
-                    <Image src={LFlogo} alt="Logo" width={30} height={33} />
-                    <p>LiveForbundet </p>
-                    <IoArrowForwardSharp />
-                  </HeaderLinks>
+                  {navLinks.map((link, index) => {
+                    const isActive = pathname === link.href;
+                    const fadeDelay = 0.3 + index * 0.08;
+                    return (
+                      <HeaderLinks
+                        key={`${link.href}-${link.text}`}
+                        href={link.href}
+                        isActive={isActive}
+                        className="animate-fade-in opacity-0"
+                        style={{ animationDelay: `${fadeDelay}s` }}
+                      >
+                        {link.href === "/liveforbundet" && (
+                          <Image
+                            src={LFlogo}
+                            alt="Liveforbundet logo"
+                            width={20}
+                            height={20}
+                          />
+                        )}
+                        {link.text}
+                        {link.href === "/liveforbundet" && (
+                          <IoArrowForwardSharp size={20} />
+                        )}
+                      </HeaderLinks>
+                    );
+                  })}
                 </nav>
                 <span className="flex items-center gap-2 text-sm tracking-wider text-white/70">
                   <OpeningHours type="burgermenu" />
@@ -125,13 +152,8 @@ const Header = () => {
         </div>
       </div>
       {isSearchOpen && (
-        <div id="header-search-panel-mobile" className="mt-3 md:hidden">
-          <Search
-            id="header-search-input-mobile"
-            value={searchValue}
-            onChange={setSearchValue}
-            className="w-full max-w-none"
-          />
+        <div id="header-search-panel-mobile" className="mt-3">
+          <Search />
         </div>
       )}
     </header>

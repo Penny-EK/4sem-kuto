@@ -43,7 +43,9 @@ export default function OpeningHours({ title, type }) {
       </button>
 
       {isOpen && (
-        <div className={panelClass}>
+        <div
+          className={`${panelClass} ${isNav ? "border-slate-300 p-4 shadow-lg" : ""}`}
+        >
           <h2
             className={`font-['Raleway'] text-3xl font-normal uppercase ${
               isNav ? "text-black" : "text-white"
