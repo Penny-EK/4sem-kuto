@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ArticleCard = ({ id, slug, image, title, date }) => {
-  const articlePath = slug || id;
+  const articlePath = slug;
 
   return (
     <article className="mb-6">

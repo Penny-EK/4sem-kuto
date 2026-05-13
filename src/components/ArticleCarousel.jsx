@@ -66,7 +66,7 @@ const ArticleCarousel = ({ articles = [] }) => {
   };
 
   return (
-    <section className="relative">
+    <section className="">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Seneste nyt</h2>
         <div className="flex gap-2">
@@ -93,7 +93,7 @@ const ArticleCarousel = ({ articles = [] }) => {
         className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2"
       >
         {articles.slice(0, 5).map((article) => (
-          <div key={article.id} className="min-w-59 snap-start">
+          <div key={article.id} className="snap-start">
             <ArticleCarouselCard article={article} />
           </div>
         ))}
