@@ -64,18 +64,54 @@
 ========================= */
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
+  min-height: 100vh;
 }
 
-body.liveforbundet-site {
-  background: linear-gradient(180deg, #ff8080 0%, #c091ae 50%, #81a3dd 100%);
-  
-  color: #ffffff;
+body.liveforbundet {
+  --liveforbundet-bg: linear-gradient(
+    180deg,
+    #ff8080 0%,
+    #c091ae 50%,
+    #81a3dd 100%
+  );
+  background: transparent;
+  isolation: isolate;
+  position: relative;
+  color: var(--background);
+}
+
+body.liveforbundet::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--liveforbundet-bg);
+  pointer-events: none;
+}
+
+.liveforbundet-surface {
+  background: var(--liveforbundet-bg);
+  background-attachment: fixed;
+}
+
+.liveforbundet-cutout-card {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 39%,
+    83% 39%,
+    83% 61%,
+    100% 61%,
+    100% 100%,
+    0 100%
+  );
 }
 
 body {
