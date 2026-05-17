@@ -31,8 +31,16 @@
   }
 }
 
+/* test */
+body:has(#liveforbundet) {
+  background: linear-gradient(180deg, #ff8080 0%, #c091ae 50%, #81a3dd 100%);
+  color: var(--background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /* =========================
-   COLORS
+   COLORSs
 ========================= */
 :root {
   --background: #ffffff;
@@ -74,7 +82,7 @@ body {
   min-height: 100vh;
 }
 
-body.liveforbundet {
+/* body.liveforbundet {
   --liveforbundet-bg: linear-gradient(
     180deg,
     #ff8080 0%,
@@ -99,9 +107,9 @@ body.liveforbundet::before {
 .liveforbundet-surface {
   background: var(--liveforbundet-bg);
   background-attachment: fixed;
-}
+} */
 
-.liveforbundet-cutout-card {
+/* .liveforbundet-cutout-card {
   clip-path: polygon(
     0 0,
     100% 0,
@@ -112,7 +120,7 @@ body.liveforbundet::before {
     100% 100%,
     0 100%
   );
-}
+} */
 
 body {
   /* layout setup */

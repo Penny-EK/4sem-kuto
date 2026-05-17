@@ -21,7 +21,7 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   const menuRef = useRef(null);
 
   const navLinks = [
@@ -66,8 +66,14 @@ const Header = () => {
     >
       <div className="flex items-start justify-between gap-5 md:items-center">
         <a href="/forside">
-          <Image src={logo} alt="Logo" width={120} height={120} />
+          <Image
+            src={pathname === "/liveforbundet" ? LFlogo : logo}
+            alt={pathname === "/liveforbundet" ? "Liveforbundet logo" : "Logo"}
+            width={pathname === "/liveforbundet" ? "60" : "120"}
+            height={pathname === "/liveforbundet" ? "60" : "120"}
+          />
         </a>
+
         {/* show opening hours if not on liveforbundet page */}
         <div className="flex flex-1 items-center justify-end gap-5">
           {pathname !== "/liveforbundet" && (
@@ -87,7 +93,14 @@ const Header = () => {
               </button>
             </div>
           )}
-          {pathname == "/liveforbundet" && <a>Kuto.dk</a>}
+          {pathname == "/liveforbundet" && (
+            <a
+              className="curver-pointer justify-start font-['Raleway'] leading-9 font-bold text-white transition duration-200 hover:underline hover:decoration-[#FFE438] hover:decoration-2 hover:underline-offset-4"
+              href="/forside"
+            >
+              Kuto.dk
+            </a>
+          )}
           <div ref={menuRef}>
             {/* menu button */}
             <button
@@ -97,12 +110,12 @@ const Header = () => {
               aria-controls="header-menu-panel"
               className="inline-flex h-10 w-10 items-center justify-center leading-none transition duration-200 hover:opacity-70"
             >
-              <IoMenuSharp size={25} />
+              <IoMenuSharp size={25} className="curver-pointer" />
             </button>
             {isMenuOpen && (
               <div
                 id="header-menu-panel"
-                className="animate-slide-in-right absolute top-0 right-0 z-100 h-dvh w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
+                className="animate-slide-in-right fixed top-0 right-0 z-100 h-full w-dvw max-w-194 bg-[#1B1B1B] p-9.5 text-white"
               >
                 <div className="flex justify-end">
                   <button

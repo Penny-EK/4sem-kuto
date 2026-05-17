@@ -15,7 +15,7 @@ export default async function Liveforbundet() {
   const heroEvents = (events || []).slice(0, 3);
 
   return (
-    <main className="liveforbundet contents">
+    <main id="liveforbundet" className="liveforbundet contents">
       {heroEvents.length > 0 && <HeroHeader heroEvents={heroEvents} />}
       <SectionWrapper
         padding="py-12"
